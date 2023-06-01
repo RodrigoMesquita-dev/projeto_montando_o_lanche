@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div v-if="etapa == 1" class="col-md-6">
                     <!--tipos do pao-->
                     <div class="card">
                         <div class="card-header">
@@ -117,7 +117,42 @@
                             </div>
                         </div>
                     </div>
+                    <!--Botão de fazer pedido-->
+                    <div class="row mt-2">
+                        <div class="col d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary" @click="fazerPedido()">Fazer pedido</button>
+                        </div>
+                    </div>
                 </div>
+                <!-- segunda tela -->
+                <div v-if="etapa == 2" class="col-md-6">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                Informe seus dados
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="name">Nome</label>
+                                        <input class="form-control" type="text" v-model="inputNome" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="endereco">Endereço</label>
+                                        <input class="form-control" type="text" v-model="inputEndereco" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col d-flex justify-content-end">
+                            <button type="button" class="btn btn-warning mx-1" @click="etapa==1">Retornar</button>
+                            <button type="button" class="btn btn-success mx-1" @click="finalizar()">Finalizar</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -130,6 +165,21 @@
                 inputSaladas: [],
                 inputMolhos: [],
                 inputTipoHamburger: '',
+                inputNome:'',
+                inputEndereco:'',
+                etapa: 1,
+            },
+            methods: {
+                fazerPedido(){
+                    if (this.inputTipoPao && this.inputTipoHamburger) {
+                        this.etapa = 2;
+                    } else {
+                        alert('Você precisa selecionar no mínimo um pão e um hamburger')
+                    }
+                },
+                finalizar(){
+                    
+                }
             },
             computed: {
                 pao() {
